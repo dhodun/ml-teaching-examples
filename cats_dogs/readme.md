@@ -9,6 +9,11 @@ This folder contains a number of teaching labs that use Keras to build a basic b
 
 Click here: [gcloud installation instructions](https://cloud.google.com/sdk/downloads)
 
+Login:
+```bash
+gcloud auth login
+```
+
 ### Create VM and Jupyter Notebook
 
 For this lab we will use a Jupyter Notebook running on a Google Compute Engine (GCE) VM backed by a GPU.
