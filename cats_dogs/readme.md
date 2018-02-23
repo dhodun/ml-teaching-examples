@@ -5,11 +5,15 @@ This folder contains a number of teaching labs that use Keras to build a basic b
 
 ## Setup
 
+### Install gcloud SDK on your local workstation
+
+Click here: [gcloud installation instructions](https://cloud.google.com/sdk/downloads)
+
 ### Create VM and Jupyter Notebook
 
 For this lab we will use a Jupyter Notebook running on a Google Compute Engine (GCE) VM backed by a GPU.
 
-Open the Cloud Shell in the Google Cloud console and run the following 
+Open a shell on your local workstation with gcloud installed and run the following: 
 
 ```
 gcloud compute instances create [vm-name]  \
@@ -27,7 +31,7 @@ After a minute, we should be able to connect:
 
 ```
 gcloud config set compute/zone us-central1-c
-gcloud compute ssh [vm-name] -- -L 8080:localhost:8080
+gcloud compute ssh [vm-name] -- -L 8088:localhost:8088
 ```
 
 ### Download code and install dependencies
@@ -50,11 +54,11 @@ On VM:
 jupyter notebook --port 8088
 ```
 
-In the Google Cloud console click "Web Preview" button on upper right of Cloud Shell and click 'Preview on port 8080' to open Jupyter Window. You will need to copy and paste the token generated in the Jupyter start output. To login.
+Copy and paste the jupyter link into a local browser if it does not launch automatically. 
 
-Open the First notebook in the 'ml-teaching-examples/cats_dogs' directory.
+Navigate to and open the First notebook in the 'ml-teaching-examples/cats_dogs' directory and proceed with instructions.
 
-## Answers
+## Answers to code samples
 
 ### Building our network
 
@@ -132,7 +136,7 @@ We need to setup CUDA so Tensorflow can use our image.  The following commands,
 run on the evaluation VM, will install CUDA and Tensorflow on our GPU VM. After 
 the installation finishes, we recommend you restart the VM.
 
-```
+```bash
 cat > /tmp/setup.sh <<HERE
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 
@@ -151,28 +155,28 @@ HERE
 sudo bash /tmp/setup.sh
 ```
 
-```
+```bash
 sudo shutdown -r now
 ```
 
-```
+```bash
 gcloud compute ssh [vm-name]
 ```
 
 On the newly restarted VM, make sure NVIDIA card is working:
-```
+```bash
 nvidia-smi
 ```
 
 Download code:
-```
+```bash
 git clone https://github.com/dhodun/ml-teaching-examples.git
 ```
 
 ### Start Jupyter Notebook and Connect
 
 On VM:
-```
+```bash
 jupyter notebook --port 8088
 ```
 
