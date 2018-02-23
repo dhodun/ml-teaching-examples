@@ -1,0 +1,12 @@
+trainingInput:
+  scaleTier: BASIC
+  hyperparameters:
+    goal: MINIMIZE
+    maxTrials: 2
+    maxParallelTrials: 1
+    params:
+      - parameterName: train_steps
+        type: INTEGER
+        minValue: 3
+        maxValue: 80
+        scaleType: UNIT_LINEAR_SCALE
