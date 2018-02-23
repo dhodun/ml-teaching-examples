@@ -54,6 +54,48 @@ In the Google Cloud console click "Web Preview" button on upper right of Cloud S
 
 Open the First notebook in the 'ml-teaching-examples/cats_dogs' directory.
 
+## Answers
+
+### Building our network
+
+```python
+from keras import models
+from keras import layers
+
+model = models.Sequential()
+
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(150,150,3)))
+model.add(layers.MaxPooling2D((2,2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2,2)))
+model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2,2)))
+model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2,2)))
+model.add(layers.Flatten())
+model.add(layers.Dense(512, activation='relu'))
+model.add(layers.Dense(1, activation='sigmoid'))
+```
+
+### Training our network
+```python
+history = model.fit_generator(
+    train_generator,
+    steps_per_epoch=100,
+    epochs=30,
+    validation_data=validation_generator,
+    validation_steps=50)
+
+```
+
+### Transfer Learning
+```python
+from keras.applications import VGG16
+
+conv_base = VGG16(weights='imagenet',
+                  include_top=False,
+                  input_shape=(150, 150, 3))
+```
 
 ## Appendix
 
@@ -103,7 +145,7 @@ apt-get update
 apt-get install -y --no-install-recommends libcudnn7=7.0.5.15-1+cuda9.0
 apt install -y python-pip python-tk
 pip install tensorflow-gpu==1.5
-pip install numpy pandas keras jupyter matplotlib
+pip install numpy pandas keras jupyter matplotlib datalab h5py
 HERE
 
 sudo bash /tmp/setup.sh
