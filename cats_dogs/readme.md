@@ -9,7 +9,7 @@ This folder contains a number of teaching labs that use Keras to build a basic b
 
 Click here: [gcloud installation instructions](https://cloud.google.com/sdk/downloads)
 
-Login:
+Start a shell and login:
 ```bash
 gcloud auth login
 ```
@@ -20,8 +20,15 @@ For this lab we will use a Jupyter Notebook running on a Google Compute Engine (
 
 Open a shell on your local workstation with gcloud installed and run the following: 
 
+```bash
+vm_name=[MY-VM-NAME]
 ```
-gcloud compute instances create [vm-name]  \
+```bash
+project_id=[MY-PROJECT-ID]
+```
+
+```
+gcloud compute instances create $vm_name  \
  --machine-type=n1-standard-4  \
  --image-project=dhodun-lab  \
  --image=gpu-tf-image  \
@@ -29,15 +36,16 @@ gcloud compute instances create [vm-name]  \
  --accelerator type=nvidia-tesla-p100 \
  --maintenance-policy TERMINATE \
  --restart-on-failure \
- --zone=us-central1-c
+ --zone=us-central1-c \
+ --project=$project_id
 ```
 
 After a minute, we should be able to connect: 
 
 ```
 gcloud config set compute/zone us-central1-c
-gcloud config set project [project-id]
-gcloud compute ssh [vm-name] -- -L 8888:localhost:8888
+gcloud config set project $project_id
+gcloud compute ssh $vm_name -- -L 8888:localhost:8888
 ```
 
 ### Test GPU and download code
