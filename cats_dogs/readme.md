@@ -31,10 +31,11 @@ After a minute, we should be able to connect:
 
 ```
 gcloud config set compute/zone us-central1-c
-gcloud compute ssh [vm-name] -- -L 8088:localhost:8088
+gcloud config set project [project-id]
+gcloud compute ssh [vm-name] -- -L 8888:localhost:8888
 ```
 
-### Download code and install dependencies
+### Test GPU and download code
 
 
 On the newly created VM, make sure NVIDIA card is working:
@@ -163,7 +164,7 @@ sudo shutdown -r now
 gcloud compute ssh [vm-name]
 ```
 
-On the newly restarted VM, make sure NVIDIA card is working:
+On the newly restarted VM, make sure NVIDIA card is configured correctly:
 ```bash
 nvidia-smi
 ```
